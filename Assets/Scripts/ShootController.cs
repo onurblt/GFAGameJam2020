@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ShootController : MonoBehaviour
 {
-    //Kartopu Objesi
-    public GameObject karTopu;
+    public GameObject snowBall;
+    public GameObject player;
 
-    public float fırlatmaHızı = 10.0f;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +20,12 @@ public class ShootController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Rigidbody karTopuRigidbody = karTopu.GetComponent<Rigidbody>();
-            karTopuRigidbody.useGravity = true;
-            karTopuRigidbody.AddForce(transform.forward * fırlatmaHızı, ForceMode.Impulse);
+            Vector3 newPos = player.transform.position + new Vector3(0, 1, 0);
+            GameObject newSnowBall = Instantiate(snowBall, newPos, Quaternion.identity);
+            Rigidbody newSnowBallRigidbody = newSnowBall.GetComponent<Rigidbody>();
+            newSnowBallRigidbody.useGravity = true;
+            newSnowBallRigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
+            Destroy(newSnowBall, 1);
         }
     }
 }
