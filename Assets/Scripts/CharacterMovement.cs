@@ -6,6 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
 
     private CharacterController controller;
+    public CameraFollow cameraFollow;
 
     public float speed;
 
@@ -13,11 +14,13 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        cameraFollow.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        cameraFollow.enabled = true;
         float movement =0;
         float side = 0;
         if (Input.GetKey(KeyCode.A))

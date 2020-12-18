@@ -24,13 +24,14 @@ public class CameraFollow : MonoBehaviour
     {
         targetHeight = Player.position.y + followHeight;
 
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         currentRotation = transform.eulerAngles.y;
 
         currentHeight =  Mathf.Lerp(transform.position.y, targetHeight, followHeight * Time.deltaTime);
 
         Quaternion euler = Quaternion.Euler(0f, currentRotation, 0f);
 
-        Vector3 targetPosition = Player.position - (euler * Vector3.forward) * followDistence;
+        Vector3 targetPosition = Player.position /* (euler * Vector3.forward)*/-new Vector3(0,0,1) * followDistence;
 
         targetPosition.y = currentHeight;
 
