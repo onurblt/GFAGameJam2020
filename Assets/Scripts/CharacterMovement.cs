@@ -47,14 +47,10 @@ public class CharacterMovement : MonoBehaviour
             rot = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + side * turnSpeed * Time.deltaTime, rot.eulerAngles.z);
             transform.rotation = rot;
         }
-        Vector3 forward = transform.forward;
-        Vector3 up = transform.up;
-        Vector3 cp = transform.right;// Vector3.Cross(forward, up);
-        //Debug.Log("forward="+forward.ToString());
-        //Debug.Log("cp=" + cp.ToString());
 
+        Vector3 right = transform.right;
 
-        controller.Move(new Vector3(cp.x*movement,0, cp.z * movement) * speed * Time.deltaTime);
+        controller.Move(new Vector3(right.x*movement,0, right.z * movement) * speed * Time.deltaTime);
 
     }
 }
