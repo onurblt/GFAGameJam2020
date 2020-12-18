@@ -49,7 +49,7 @@ public class CharacterMovement : MonoBehaviour
         }
         Vector3 forward = transform.forward;
         Vector3 up = transform.up;
-        Vector3 cp = Vector3.Cross(forward, up);
+        Vector3 cp = transform.right;// Vector3.Cross(forward, up);
         //Debug.Log("forward="+forward.ToString());
         //Debug.Log("cp=" + cp.ToString());
 
