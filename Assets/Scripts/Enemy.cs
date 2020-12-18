@@ -8,12 +8,14 @@ public class Enemy : MonoBehaviour
     private Transform player;
     public float speed;
     float health = 100.0f;
+    bool hitted;
 
     // Start is called before the first frame update
     void Start()
     {
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        hitted = false;
 
     }
 
@@ -22,9 +24,15 @@ public class Enemy : MonoBehaviour
     {
         if (health < 0.0f)
         {
-            Debug.Log("Dead");
+            //Debug.Log("Dead");
             return;
         }
+
+        if (hitted)
+        {
+            return;
+        }
+
         transform.LookAt(player);
         transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
 
@@ -39,8 +47,16 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag=="Snowball")
         {
             Debug.Log("hit");
+            StartCoroutine(Slowdown(1.0f));
             health -= 20.0f;
         }
+    }
+
+    IEnumerator Slowdown(float waitTime)
+    {
+        hitted = true;
+        yield return new WaitForSeconds(waitTime);
+        hitted = false;
     }
     /*
     private void OnTriggerEnter(Collider collider)
