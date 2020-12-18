@@ -20,7 +20,9 @@ public class ShootController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 newPos = player.transform.position + new Vector3(0, 1, 0);
+            //transform.position + new Vector3(0, 1.0f, 0);
+            //player.transform.position + new Vector3(0, 0.5f, 0);
+            Vector3 newPos = transform.position + new Vector3(0, 0.0f, 0);
             GameObject newSnowBall = Instantiate(snowBall, newPos, Quaternion.identity);
             Rigidbody newSnowBallRigidbody = newSnowBall.GetComponent<Rigidbody>();
             newSnowBallRigidbody.useGravity = true;
