@@ -18,24 +18,40 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dir = Vector3.zero;
-        if(Input.GetKey(KeyCode.A))
+        float movement =0;
+        float side = 0;
+        if (Input.GetKey(KeyCode.A))
         {
-            dir.x = -1;
+            side = -1;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            dir.x = 1;
+            side = 1;
         }
         if (Input.GetKey(KeyCode.W))
         {
-            dir.z = 1;
+            movement = 1;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            dir.z = -1;
+            movement = -1;
         }
 
-        controller.Move(dir*speed * Time.deltaTime);
+        if (movement != 0.0f)
+        {
+            Quaternion rot = transform.rotation;
+            float turnSpeed = speed * 50.0f;
+            rot = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + side * turnSpeed * Time.deltaTime, rot.eulerAngles.z);
+            transform.rotation = rot;
+        }
+        Vector3 forward = transform.forward;
+        Vector3 up = transform.up;
+        Vector3 cp = Vector3.Cross(forward, up);
+        //Debug.Log("forward="+forward.ToString());
+        //Debug.Log("cp=" + cp.ToString());
+
+
+        controller.Move(new Vector3(cp.x*movement,0, cp.z * movement) * speed * Time.deltaTime);
+
     }
 }

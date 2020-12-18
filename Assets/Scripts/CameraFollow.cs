@@ -26,7 +26,7 @@ public class CameraFollow : MonoBehaviour
 
         currentRotation = transform.eulerAngles.y;
 
-        currentHeight = Mathf.Lerp(transform.position.y, targetHeight, followHeight * Time.deltaTime);
+        currentHeight =  Mathf.Lerp(transform.position.y, targetHeight, followHeight * Time.deltaTime);
 
         Quaternion euler = Quaternion.Euler(0f, currentRotation, 0f);
 
