@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     float health = 100.0f;
     bool hitted;
 
+
+    public GameObject stun;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +26,21 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health < 0.0f)
-        {
-            //Debug.Log("Dead");
-            return;
-        }
+      
 
         if (hitted)
         {
+            stun.SetActive(true);
+            return;
+        }
+        else
+        {
+            stun.SetActive(false);
+        }
+
+        if (health < 0.0f)
+        {
+            //Debug.Log("Dead");
             return;
         }
 
