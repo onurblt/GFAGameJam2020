@@ -51,12 +51,16 @@ public class Enemy : MonoBehaviour
         //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
         Vector3 dir = (player.position-transform.position ).normalized;
         dir.y = 0;
-        controller.Move(dir * speed * Time.deltaTime);
+        transform.position += dir * Time.deltaTime * speed;
+        //controller.Move(dir * speed * Time.deltaTime);
+        Vector3 rot=transform.rotation.eulerAngles;
+
+        transform.rotation=Quaternion.Euler(15,rot.y,rot.z);
 
 
     }
 
-    
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag=="Snowball")
@@ -74,8 +78,8 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    */
     
-    /*
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Snowball")
@@ -94,23 +98,12 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    */
+    
     IEnumerator Slowdown(float waitTime)
     {
         hitted = true;
         yield return new WaitForSeconds(waitTime);
         hitted = false;
     }
-    /*
-    private void OnTriggerEnter(Collider collider)
-    {
-
-        Debug.Log("hit");
-        if (collider.tag == "Snowball")
-        {
-            Debug.Log("hit");
-            health -= 20.0f;
-        }
-    }
-    */
+   
 }
