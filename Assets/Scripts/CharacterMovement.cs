@@ -10,11 +10,14 @@ public class CharacterMovement : MonoBehaviour
 
     public float speed;
 
+    private SoundController soundController;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         cameraFollow.enabled = false;
+        soundController = FindObjectOfType<SoundController>();
     }
 
     // Update is called once per frame
@@ -26,18 +29,22 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             side = -1;
+            soundController.PlayWalkEffect();
         }
         if (Input.GetKey(KeyCode.D))
         {
             side = 1;
+            soundController.PlayWalkEffect();
         }
         if (Input.GetKey(KeyCode.W))
         {
             movement = 1;
+            soundController.PlayWalkEffect();
         }
         if (Input.GetKey(KeyCode.S))
         {
             movement = -1;
+            soundController.PlayWalkEffect();
         }
 
         if (movement != 0.0f)
