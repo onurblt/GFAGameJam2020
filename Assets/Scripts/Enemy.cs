@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,13 +15,13 @@ public class Enemy : MonoBehaviour
 
     public GameObject stun;
 
-    private CharacterController controller;
+    private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        controller = gameObject.GetComponent<CharacterController>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         hitted = false;
 
@@ -49,18 +50,15 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Euler(90, rotEuler.y, rotEuler.z);
             return;
         }
-
+        /*
         transform.LookAt(player);
-        //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
         Vector3 dir = (player.position-transform.position ).normalized;
         dir.y = 0;
         transform.position += dir * Time.deltaTime * speed;
-        //controller.Move(dir * speed * Time.deltaTime);
         Vector3 rot=transform.rotation.eulerAngles;
-
         transform.rotation=Quaternion.Euler(15,rot.y,rot.z);
-
-
+        */
+        agent.SetDestination(player.position);
     }
 
     /*
