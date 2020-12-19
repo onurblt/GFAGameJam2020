@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour
     public float speed;
     float health = 100.0f;
     bool hitted;
-
+    bool dead;
+    public bool isDead { get { return dead; } }
 
     public GameObject stun;
 
@@ -40,9 +41,9 @@ public class Enemy : MonoBehaviour
             stun.SetActive(false);
         }
 
-        if (health < 0.0f)
+        if (dead)
         {
-            Debug.Log("Dead");
+            //Debug.Log("Dead");
           
             return;
         }
@@ -90,6 +91,7 @@ public class Enemy : MonoBehaviour
 
             if(health<0.0f)
             {
+                dead = true;
                 for (int i = 0; i < GetComponentsInChildren<CapsuleCollider>().Length; i++)
                 {
                     GetComponentsInChildren<CapsuleCollider>()[i].enabled = false;
@@ -105,5 +107,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         hitted = false;
     }
+
+    
    
 }
