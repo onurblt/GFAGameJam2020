@@ -11,6 +11,9 @@ public class ShootController : MonoBehaviour
 
     private SoundController soundController;
 
+    bool throwing;
+    public bool isThrowing { get { return throwing; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,15 @@ public class ShootController : MonoBehaviour
             Destroy(newSnowBall, 1);
 
             soundController.PlaySnowballEffect();
+            StartCoroutine(ThrowEnum());
         }
     }
+
+    IEnumerator ThrowEnum()
+    {
+        throwing = true;
+        yield return new WaitForSeconds(0.5f);
+        throwing = false;
+    }
+   
 }

@@ -13,6 +13,9 @@ public class CharacterMovement : MonoBehaviour
     private SoundController soundController;
     private Footstep footstep;
 
+
+    private PlayerAnimationController animController;
+    private ShootController shootController;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,8 @@ public class CharacterMovement : MonoBehaviour
         cameraFollow.enabled = false;
         soundController = FindObjectOfType<SoundController>();
         footstep = GetComponent<Footstep>();
+        animController = GetComponentInChildren<PlayerAnimationController>();
+        shootController = GetComponentInChildren<ShootController>();
     }
 
     // Update is called once per frame
@@ -59,11 +64,25 @@ public class CharacterMovement : MonoBehaviour
 
         Vector3 right = transform.right;
 
-        controller.Move(new Vector3(right.x*movement,0, right.z * movement) * speed * Time.deltaTime);
-
-        if (movement != 0.0f)
+        if (!shootController.isThrowing)
         {
-            footstep.Generate();
+            if (movement != 0.0f)
+            {
+                animController.JogAnim();
+                footstep.Generate();
+            }
+            else
+            {
+                animController.IdleAnim();
+            }
+
+            controller.Move(new Vector3(right.x * movement, 0, right.z * movement) * speed * Time.deltaTime);
+
         }
+        else
+        {
+            animController.ThrowAnim();
+        }
+       
     }
 }
