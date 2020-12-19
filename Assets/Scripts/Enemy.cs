@@ -33,6 +33,9 @@ public class Enemy : MonoBehaviour
 
         if (hitted)
         {
+            Vector3 rotation = stun.transform.localRotation.eulerAngles;
+            rotation.y += Time.deltaTime * 100.0f;
+            stun.transform.localRotation = Quaternion.Euler(rotation);
             stun.SetActive(true);
             return;
         }
