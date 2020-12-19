@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("asdas");
         startPanel.SetActive(false);
         healthBar.SetActive(true);
     }
