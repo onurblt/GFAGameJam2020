@@ -57,7 +57,7 @@ public class CharacterMovement : MonoBehaviour
         if (movement != 0.0f)
         {
             Quaternion rot = transform.rotation;
-            float turnSpeed = speed * 50.0f;
+            float turnSpeed = speed * 100.0f;
             rot = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + side * turnSpeed * Time.deltaTime, rot.eulerAngles.z);
             transform.rotation = rot;
         }
