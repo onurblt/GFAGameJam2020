@@ -43,10 +43,14 @@ public class Enemy : MonoBehaviour
             rotation.y += Time.deltaTime * 100.0f;
             stun.transform.localRotation = Quaternion.Euler(rotation);
             stun.SetActive(true);
+
+            agent.speed = 0.0f;
             return;
         }
         else
         {
+
+            agent.speed = speed;
             stun.SetActive(false);
         }
 
