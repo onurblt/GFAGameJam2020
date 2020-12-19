@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
         if (dead)
         {
             //Debug.Log("Dead");
-
+            agent.isStopped=true;
             Vector3 rotEuler = transform.rotation.eulerAngles;
             transform.rotation = Quaternion.Euler(90, rotEuler.y, rotEuler.z);
             return;

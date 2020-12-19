@@ -17,7 +17,7 @@ public class Footstep : MonoBehaviour
         Vector3 position = transform.position;
         if(Vector3.Distance(position,prevPosition)>1.0f)
         {
-            GameObject generated = Instantiate(footstep, transform.position+new Vector3(0,-0.55f,0.0f), transform.rotation);
+            GameObject generated = Instantiate(footstep, transform.position+new Vector3(0,0.00015f,0.0f), transform.rotation);
             Destroy(generated, 5.0f);
             prevPosition = position;
         }

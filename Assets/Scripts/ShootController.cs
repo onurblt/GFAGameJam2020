@@ -23,7 +23,7 @@ public class ShootController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !throwing)
         {
             //transform.position + new Vector3(0, 1.0f, 0);
             //player.transform.position + new Vector3(0, 0.5f, 0);
