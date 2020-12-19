@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     private Transform player;
     public float speed;
-    float health = 100.0f;
+    int health = 5;
     bool hitted;
     bool dead;
     public bool isDead { get { return dead; } }
@@ -22,11 +22,12 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        dead = false;
         agent = gameObject.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         hitted = false;
         soundController = FindObjectOfType<SoundController>();
+        agent.speed = speed;
     }
 
     // Update is called once per frame
@@ -94,9 +95,9 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("hit");
             StartCoroutine(Slowdown(1.0f));
-            health -= 20.0f;
+            health -= 1;
 
-            if(health<0.0f)
+            if(health<=0)
             {
                 dead = true;
                 for (int i = 0; i < GetComponentsInChildren<CapsuleCollider>().Length; i++)
