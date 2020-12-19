@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public float speed;
 
     private SoundController soundController;
+    private Footstep footstep;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         cameraFollow.enabled = false;
         soundController = FindObjectOfType<SoundController>();
+        footstep = GetComponent<Footstep>();
     }
 
     // Update is called once per frame
@@ -59,5 +61,9 @@ public class CharacterMovement : MonoBehaviour
 
         controller.Move(new Vector3(right.x*movement,0, right.z * movement) * speed * Time.deltaTime);
 
+        if (movement != 0.0f)
+        {
+            footstep.Generate();
+        }
     }
 }
