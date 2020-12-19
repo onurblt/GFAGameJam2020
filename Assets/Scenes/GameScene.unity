@@ -953,6 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snowballEffect: {fileID: 1626369537}
   walkEffect: {fileID: 1129372298}
+  snowmanRoar: {fileID: 0}
 --- !u!4 &407733464
 Transform:
   m_ObjectHideFlags: 0
@@ -8758,7 +8759,7 @@ PrefabInstance:
     - target: {fileID: 3776647981585663116, guid: 799ef2e4602ef254589aefd4677ebe2c,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4082566413667090249, guid: 799ef2e4602ef254589aefd4677ebe2c,
         type: 3}
