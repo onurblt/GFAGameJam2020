@@ -6,14 +6,21 @@ public class Footstep : MonoBehaviour
 {
     public GameObject footstep;
 
-    public void Generate()
+    Vector3 prevPosition;
+    private void Start()
     {
-        StartCoroutine(GenerateCoroutine());
+        prevPosition = transform.position;
     }
 
-    private IEnumerator GenerateCoroutine()
+    public void Generate()
     {
-        yield return new WaitForSeconds(1);
-        GameObject generated = Instantiate(footstep, transform.position, transform.rotation);
+        Vector3 position = transform.position;
+        if(Vector3.Distance(position,prevPosition)>1.0f)
+        {
+            GameObject generated = Instantiate(footstep, transform.position+new Vector3(0,-0.55f,0.0f), transform.rotation);
+            Destroy(generated, 5.0f);
+            prevPosition = position;
+        }
     }
+   
 }
