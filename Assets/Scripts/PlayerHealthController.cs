@@ -6,6 +6,7 @@ public class PlayerHealthController : MonoBehaviour
 {
     int health=5;
     public GameObject healthBar;
+    public GameObject healthRedPanel;
     bool lockHit;
     
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class PlayerHealthController : MonoBehaviour
             if (!lockHit)
             {
                 health -= 1;
+                StartCoroutine(RedScreenBlink());
                 StartCoroutine(WaitLock());
             }
         }
@@ -50,13 +52,21 @@ public class PlayerHealthController : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
         lockHit = false;
     }
-   /*
-    private void OnCollisionEnter(Collision collision)
+
+    IEnumerator RedScreenBlink()
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            health -= 1;
-        }
+        healthRedPanel.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        healthRedPanel.SetActive(false);
     }
-   */
+
+    /*
+     private void OnCollisionEnter(Collision collision)
+     {
+         if (collision.gameObject.tag == "Enemy")
+         {
+             health -= 1;
+         }
+     }
+    */
 }
