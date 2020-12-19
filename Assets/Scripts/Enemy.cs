@@ -13,11 +13,13 @@ public class Enemy : MonoBehaviour
 
     public GameObject stun;
 
+    private CharacterController controller;
 
     // Start is called before the first frame update
     void Start()
     {
 
+        controller = gameObject.GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         hitted = false;
 
@@ -40,29 +42,59 @@ public class Enemy : MonoBehaviour
 
         if (health < 0.0f)
         {
-            //Debug.Log("Dead");
+            Debug.Log("Dead");
+          
             return;
         }
 
         transform.LookAt(player);
-        transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
+        //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
+        Vector3 dir = (player.position-transform.position ).normalized;
+        dir.y = 0;
+        controller.Move(dir * speed * Time.deltaTime);
 
-      
+
     }
 
-
+    
     private void OnCollisionEnter(Collision collision)
     {
-
-        //Debug.Log("hit");
         if (collision.gameObject.tag=="Snowball")
         {
             Debug.Log("hit");
             StartCoroutine(Slowdown(1.0f));
             health -= 20.0f;
+            if (health < 0.0f)
+            {
+                for (int i = 0; i < GetComponentsInChildren<CapsuleCollider>().Length; i++)
+                {
+                    GetComponentsInChildren<CapsuleCollider>()[i].enabled = false;
+                }
+
+            }
         }
     }
+    
+    /*
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Snowball")
+        {
+            Debug.Log("hit");
+            StartCoroutine(Slowdown(1.0f));
+            health -= 20.0f;
 
+            if(health<0.0f)
+            {
+                for (int i = 0; i < GetComponentsInChildren<CapsuleCollider>().Length; i++)
+                {
+                    GetComponentsInChildren<CapsuleCollider>()[i].enabled = false;
+                }
+               
+            }
+        }
+    }
+    */
     IEnumerator Slowdown(float waitTime)
     {
         hitted = true;
