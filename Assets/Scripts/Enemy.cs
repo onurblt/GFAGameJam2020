@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    private SoundController soundController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,7 @@ public class Enemy : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         hitted = false;
-
+        soundController = FindObjectOfType<SoundController>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,8 @@ public class Enemy : MonoBehaviour
 
         if (hitted)
         {
+            soundController.PlaySnowmanRoar();
+
             Vector3 rotation = stun.transform.localRotation.eulerAngles;
             rotation.y += Time.deltaTime * 100.0f;
             stun.transform.localRotation = Quaternion.Euler(rotation);
