@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
             GameObject enemy = GameObject.Instantiate(enemyPrefab);
             float randAngle = Random.Range(0, 360.0f);
             float radius = 10.0f;
-            enemy.transform.position = new Vector3(Mathf.Cos(randAngle * Mathf.Deg2Rad)*radius, 17.60f, Mathf.Sin(randAngle * Mathf.Deg2Rad) * radius);
+            enemy.transform.position = new Vector3(Mathf.Cos(randAngle * Mathf.Deg2Rad)*radius, 0.0f, Mathf.Sin(randAngle * Mathf.Deg2Rad) * radius);
             enemies.Add(enemy);
         }
 
